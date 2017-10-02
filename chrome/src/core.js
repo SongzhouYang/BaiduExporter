@@ -476,15 +476,11 @@ var CORE = (function() {
                     var length = file_list.length;
                     for (var i = 0; i < length; i++) {
                         var filename = (navigator.platform.indexOf("Win") != -1) ? JSON.stringify(file_list[i].name) : CORE.escapeString(file_list[i].name);
-                        var cmd_line = "aria2c -c -s10 -k1M -x16 --enable-rpc=false -o " + filename + CORE.getHeader("aria2c_line") + " " + JSON.stringify(file_list[i].link);
+                        var cmd_line = "aria2c -o " + filename + CORE.getHeader("aria2c_line") + " " + JSON.stringify(file_list[i].link);
                         aria2c_txt_item = [
                             file_list[i].link,
                             CORE.getHeader("aria2c_txt"),
-                            " out=" + file_list[i].name,
-                            " continue=true",
-                            " max-connection-per-server=10",
-                            " split=10",
-                            " min-split-size=1M"
+                            " out=" + file_list[i].name
                         ];
                         if (localStorage.getItem("md5_checksum") == "true") {
                             cmd_line += " --checksum=md5=" + file_list[i].md5;
